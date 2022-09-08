@@ -16,6 +16,7 @@ import User from "./models/user.js";
 import MongoStore from "connect-mongo";
 import * as path from "path";
 import { fileURLToPath } from "url";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -74,12 +75,6 @@ app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
-});
-
-app.get("/fakeUser", async (req, res) => {
-  const user = new User({ email: "123felix@gmail.com", username: "Felix" });
-  const newUser = await User.register(user, "LOOOLLL");
-  res.send(newUser);
 });
 
 app.use("/", userRouter);
