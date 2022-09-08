@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate') -%>
+<h1 class="text-center mb-5">All Products</h1>
+<div class="row mb-3">
+  <% for(let product of products) {%>
+  <div
+    class="col-xl-3 offset-xl-0 col-md-4 offset-md-0 col-sm-6 offset-sm-0 col-10 offset-1"
+  >
+    <div class="card mb-3">
+      <% if(product.image) {%>
+      <img src="<%= product.image.url %>" alt="" class="img-fluid index-img" />
+      <% } else { %>
+      <img
+        src="http://www.icecream.com/content/dam/dreyersgrandicecreaminc/us/en/edy's/recipes-/Edys-teddy-bear-ice-cream-cones.jpg"
+        alt=""
+        class="img-fluid"
+      />
+      <% } %>
+      <div class="card-body">
+        <h5 class="card-title mb-0"><%= product.name %></h5>
+        <p class="card-text mb-2">
+          <small class="text-muted">Rp. <%= product.price %>,00</small>
+        </p>
+        <a
+          class="btn btn-info btn-sm text-white"
+          href="/products/<%= product._id %>/edit"
+          >Edit</a
+        >
+        <form
+          action="/products/<%= product._id %>?_method=delete"
+          method="post"
+          class="d-inline"
+        >
+          <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>

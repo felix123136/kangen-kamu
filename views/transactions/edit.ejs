@@ -1,0 +1,87 @@
+<% layout('layouts/boilerplate') -%>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 mb-3">
+    <h1 class="text-center">Edit Transaction</h1>
+    <form
+      action="/transactions/<%= transaction._id %>?_method=put"
+      method="post"
+      novalidate
+      class="validated-form my-4"
+    >
+      <% for(let product of products) {%>
+      <div class="mb-3 products">
+        <div class="row">
+          <div class="col-md-2 col-3">
+            <img
+              style="height: 75px; width: 75px; border-radius: 5px"
+              src="<%= product.image.url %>"
+              alt=""
+            />
+          </div>
+          <div class="col-md-8 col-6">
+            <div class="row">
+              <label for=""><%= product.name %></label>
+            </div>
+            <div class="row">
+              <p class="text-muted">
+                Rp. <small><%= product.price.toLocaleString() %></small>,00
+              </p>
+            </div>
+          </div>
+          <% let tot = 0 %> <% for(let p of transaction.products) {%>
+          <%if(p.product.name === product.name) {%> <% tot = p.qty; %> <% break;
+          %> <% } %> <% } %>
+          <div class="col-md-2 col-3">
+            <input
+              class="form-control qtyInput"
+              type="number"
+              name="<%= product.name %>[qty]"
+              value="<%= tot %>"
+              min="0"
+            />
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <div class="row">
+        <div><b>Total</b></div>
+        <div>
+          <p class="text-mute">
+            <b
+              >Rp.
+              <span class="subtotal"
+                ><%= transaction.total.toLocaleString() %></span
+              ></b
+            >
+          </p>
+        </div>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-info text-white" type="submit">
+          Update Transaction
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  const totSpan = document.querySelector(".subtotal");
+  let tot = 0;
+  const products = document.querySelectorAll(".products");
+  const qtyInputs = document.querySelectorAll(".qtyInput");
+  for (let qtyInput of qtyInputs) {
+    qtyInput.addEventListener("input", () => {
+      tot = 0;
+      for (product of products) {
+        const price = parseInt(
+          product.children[0].children[1].children[1].children[0].children[0]
+            .innerHTML
+        );
+        const qty = parseInt(product.children[0].children[2].children[0].value);
+        if (isNaN(qty)) qty = 0;
+        tot += price * qty;
+      }
+      totSpan.innerHTML = tot;
+    });
+  }
+</script>

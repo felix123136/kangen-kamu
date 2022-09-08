@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg bg-danger navbar-dark mb-5 sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Kangen Kamu</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <% if(user) { %>
+        <a class="nav-link" href="/products">Products</a>
+        <a class="nav-link" href="/products/new">New Product</a>
+        <a class="nav-link" href="/transactions">Transactions</a>
+        <a class="nav-link" href="/transactions/new">New Transaction</a>
+        <% } %>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <% if(!user) { %>
+        <a href="/login" class="nav-link">Login</a>
+        <a href="/register" class="nav-link">Register</a>
+        <% } else { %>
+        <a href="/logout" class="nav-link">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

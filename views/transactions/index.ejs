@@ -1,0 +1,31 @@
+<% layout('layouts/boilerplate') -%>
+<h1 class="text-center mb-5">All Transactions</h1>
+<div class="row mb-3">
+  <% for(let transaction of transactions) {%>
+  <div
+    class="col-xl-3 offset-xl-0 col-md-4 offset-md-0 col-sm-6 offset-sm-0 col-10 offset-1"
+  >
+    <div class="card mb-3">
+      <img
+        src="https://source.unsplash.com/random/?icecream,drink"
+        alt=""
+        class="img-fluid index-img"
+      />
+      <div class="card-body">
+        <h5 class="card-title mb-0"><%= transaction.date %></h5>
+        <p class="card-text mb-2">
+          <small class="text-muted"
+            ><strong>Total: </strong>Rp. <%= transaction.total.toLocaleString()
+            %></small
+          >
+        </p>
+        <a
+          href="/transactions/<%= transaction._id %>"
+          class="btn btn-primary d-block"
+          >View Transaction</a
+        >
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>

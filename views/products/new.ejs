@@ -1,0 +1,68 @@
+<% layout('layouts/boilerplate') -%>
+<main class="container mb-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card shadow">
+        <img
+          src="https://images.unsplash.com/photo-1589378884250-431463f05637?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGljZWNyZWFtfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+          alt=""
+          class="card-img-top product-img"
+          crossorigin
+        />
+        <div class="card-body">
+          <h5 class="card-title">New Product</h5>
+          <form
+            action="/products"
+            method="post"
+            novalidate
+            class="validated-form"
+            enctype="multipart/form-data"
+          >
+            <div class="mb-3">
+              <label class="form-label" for="name">Product Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="product[name]"
+                id="name"
+                required
+              />
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Product name is required</div>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Rp</span>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="price"
+                  name="product[price]"
+                  placeholder="0.00"
+                  required
+                />
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Price is required</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="mb-3">
+                <label class="mb-2" for="image">Image</label>
+                <input
+                  class="form-control"
+                  id="image"
+                  type="file"
+                  name="image"
+                />
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <button class="btn btn-success" type="submit">Add Product</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

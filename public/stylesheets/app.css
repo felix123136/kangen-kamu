@@ -1,0 +1,11 @@
+.index-img {
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.product-img {
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
