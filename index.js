@@ -14,7 +14,10 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 import User from "./models/user.js";
 import MongoStore from "connect-mongo";
-
+import * as path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 
 app.engine("ejs", engine);
@@ -22,7 +25,7 @@ app.engine("ejs", engine);
 //Middleware
 app.use(urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/kangenKamu";
 const secret = process.env.SECRET;
@@ -45,6 +48,7 @@ const sessionConfig = {
 };
 
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 async function main() {
   await mongoose.connect(dbUrl);
